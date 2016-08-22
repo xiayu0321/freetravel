@@ -12,16 +12,65 @@ import Knapsack1 from "../images/goods/knapsack-001.jpg";
 
 import "../css/rent.css"
 class SelectArea extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: '',
+      productName: '',
+      price: '',
+      description: '',
+      product: []
+    }
+  }
 
-  componentDidMount(){
-    request.post('/api/items').end();
+  componentDidMount() {
+    request.post('/api/items')
+      .end((err, data) => {
+        this.setState({
+          product: data.body
+        });
+        // alert(data);
+        console.log("-----" + this.state.product);
+        alert(this.state.product[1].price);
+        alert(typeof data);
+      });
+  }
+
+
+  _getInformation(event) {
+    request.get('/api/items')
+      .end((err, data) => {
+        alert(data);
+        console.log("....." + data.body[1].price)
+        console.log("aaaaa" + data)
+        console.log(data.text.length);
+        // alert(this.state.id);
+      });
   }
 
 
   render() {
-    return (
+    const data = this.state.product.map(p =>
 
+      <div className="col-sm-4 col-md-3">
+        <div className="thumbnail">
+          <img src={picture1} className="picture"/>
+          <p>￥{p.price}/天 {p.productName}</p>
+          <p><a href="#" className="btn btn-primary" role="button">Button</a>
+            <a href="#" class="btn btn-default" role="button">Button</a>
+          </p>
+        </div>
+      </div>
+    );
+
+    return (
       <div className="select">
+        <div className="row row-rent">
+          <div>{data}</div>
+        </div>
+
+
+        <button className="btn btn-default btn-selete" type="button" onClick={this._getInformation}>获取数据</button>
         <div className="row row-select">
           <div className="col-xs-2" id="search">搜索:</div>
           <div className="input-group text-search">
@@ -31,6 +80,7 @@ class SelectArea extends React.Component {
             </span>
           </div>
         </div>
+        <div></div>
       </div>
     )
   }
@@ -39,6 +89,7 @@ class Picture extends React.Component {
   render() {
     return (
       <div className="row image container-fluid ">
+
         {/*<div className="picture-describe">*/}
         {/*<a href="#">*/}
         {/*<div><img src={picture1} className="picture"/></div>*/}
@@ -47,135 +98,135 @@ class Picture extends React.Component {
         {/*</div>*/}
 
 
-        <div className="row row-rent">
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a>
-                <a href="#" class="btn btn-default" role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail ">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a>
-                <a href="#" class="btn btn-default" role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail ">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
+        {/*<div className="row row-rent">*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a>*/}
+        {/*<a href="#" class="btn btn-default" role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail ">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a>*/}
+        {/*<a href="#" class="btn btn-default" role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail ">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
 
-          {/*</div>*/}
+        {/*/!*</div>*!/*/}
 
-          {/*<div className="row">*/}
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
+        {/*/!*<div className="row">*!/*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
 
-          {/*</div>*/}
+        {/*/!*</div>*!/*/}
 
-          {/*<div className="row">*/}
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
-          <div className="col-sm-4 col-md-3">
-            <div className="thumbnail">
-              <img src={picture1} className="picture"/>
-              <p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>
-              <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                     class="btn btn-default"
-                                                                                     role="button">Button</a>
-              </p>
-            </div>
-          </div>
+        {/*/!*<div className="row">*!/*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*<div className="col-sm-4 col-md-3">*/}
+        {/*<div className="thumbnail">*/}
+        {/*<img src={picture1} className="picture"/>*/}
+        {/*<p>￥400/天 佳能（Canon）EOS 100D 单反套机（EF 40mm f/2.8 STM镜头）</p>*/}
+        {/*<p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#"*/}
+        {/*class="btn btn-default"*/}
+        {/*role="button">Button</a>*/}
+        {/*</p>*/}
+        {/*</div>*/}
+        {/*</div>*/}
 
-        </div>
+        {/*</div>*/}
 
 
         {/*<div className="picture-describe">*/}

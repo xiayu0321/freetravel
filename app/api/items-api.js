@@ -10,8 +10,16 @@ router.post('/', function (req, res, next) {
     Product.create(productData, (err, all) => {
       if (err) return next(err);
       console.log('productData is in db --success');
-      // res.json(all);
+      res.json(all);
     });
   });
+});
+
+router.get('/', function (req, res, next) {
+  Product.find().lean().exec((err, data) => {
+    if (err) return next(err);
+    console.log(data[1].price+'=======');
+    res.json(data);
+  })
 });
 export default router;
