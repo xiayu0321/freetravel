@@ -112,15 +112,24 @@ class Picture extends React.Component {
     //     </div>
     //   </div>
     // );
-      const {keyword, items}  = this.props;
+      const {keyword, product}  = this.props;
       return <div>
         {
-          items.filter(item => item.toLowerCase().includes(keyword.toLowerCase()))
-            .map(i => <div>{i}
+          product.filter(item => item.productName.toLowerCase().includes(keyword.toLowerCase()))
+            .map(i => <div>{i.productName}
               <button>button</button>
             </div>)
         }
       </div>;
+    // const {keyword, items}  = this.props;
+    // return <div>
+    //   {
+    //     items.filter(item => item.toLowerCase().includes(keyword.toLowerCase()))
+    //       .map(i => <div>{i}
+    //         <button>button</button>
+    //       </div>)
+    //   }
+    {/*</div>;*/}
     }
 
 
