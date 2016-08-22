@@ -9,8 +9,19 @@ const userSchema = new Schema({
   phone: String,
 });
 
+const productSchema = new Schema({
+  id: Number,
+  productName: String,
+  imgName:String,
+  price: Number,
+  description: String
+});
+
 const User = mongoose.model('User', userSchema);
+const Product = mongoose.model('Product', productSchema);
+
 
 export {
-  User
+  User,
+  Product
 };
