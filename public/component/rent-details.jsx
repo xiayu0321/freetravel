@@ -11,29 +11,36 @@ import {Link} from 'react-router';
 import request from 'superagent';
 
 
-
 import '../css/rent-details.css';
 
 class GoodsDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: []
+      product: {}
     }
   }
+
   componentDidMount() {
     request.post('/api/items/details')
-      .send({id:this.props.params.id})
-      .end();
+      .send({id: this.props.params.id})
+      .end((err, data) => {
+        this.setState({
+          product: data.body
+        });
+      });
   }
+
   render() {
+    const productData = this.state.product;
     return (
       <div className="goods-details">
         {this.props.params.id}
+
         <div className="goods-header">
           <div className="left-pic">
             <div className="img-main-rent">
-              <img className="main-img" src={ImgMain}/>
+              <img className="main-img" src={"../images/goods/" + productData.imgName}/>
             </div>
             <div className="img-other">
               <img src={Img03}/>
@@ -42,10 +49,10 @@ class GoodsDetails extends React.Component {
             </div>
           </div>
           <div className="goods-information">
-            <p className="goods-name">旅游帐篷A1</p><br/>
+            <p className="goods-name">{productData.productName}</p><br/>
             <div className="separate-left"></div>
             <div className="separate-right"></div>
-            <p className="goods-price">商品租价：<b>50</b>元/天</p>
+            <p className="goods-price">商品租价：<b>{productData.price}</b>元/天</p>
             <p className="goods-address">商品所在地：<span>陕西省 西安市 长安区</span></p>
             <Link to='/orderPage'>
               <button type="submit" className="enter-renter">
@@ -80,7 +87,7 @@ class GoodsDetails extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

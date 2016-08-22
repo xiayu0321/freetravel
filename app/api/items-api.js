@@ -18,10 +18,10 @@ router.post('/', function (req, res, next) {
 router.post('/details', function (req, res, next) {
   const id = req.body.id;
   console.log(id);
-  // Product.findOne((id),(err,data) => {
-  //   if (err) return next(err);
-  //   console.log(data[1].id+'++++++');
-  //   res.json(data);
-  // });
+  Product.findOne({id}, (err, data) => {
+    if (err) return next(err);
+    console.log(data + '++++++');
+    res.json(data);
+  });
 });
 export default router;

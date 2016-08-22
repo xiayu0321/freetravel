@@ -20,8 +20,8 @@ class LoginAndRegisterNav extends React.Component {
         console.log(err);
         if (err) {
           if (res.statusCode === 401) {
-            alert('please login!');
-            return hashHistory.push('/login');
+            // alert('please login!');
+            // return hashHistory.push('/login');
           } else {
             return alert('请先登录!');
           }
