@@ -1,5 +1,7 @@
 import React from 'react';
 import picture1 from "../images/goods/digital-single-lens-reflex-001.jpg";
+import request from 'superagent';
+
 import Image2 from "../images/goods/digital-single-lens-reflex-002.jpg";
 import Image3 from "../images/goods/mountain-bike-cycling-001.jpg";
 import Image4 from "../images/goods/mountain-bike-cycling-002.jpg";
@@ -10,6 +12,12 @@ import Knapsack1 from "../images/goods/knapsack-001.jpg";
 
 import "../css/rent.css"
 class SelectArea extends React.Component {
+
+  componentDidMount(){
+    request.post('/api/items').end();
+  }
+
+
   render() {
     return (
 
@@ -19,8 +27,8 @@ class SelectArea extends React.Component {
           <div className="input-group text-search">
             <input type="text" className="form-control" placeholder="请输入商品"/>
             <span className="input-group-btn">
-                                    <button className="btn btn-default btn-selete" type="button">搜索</button>
-                                 </span>
+              <button className="btn btn-default btn-selete" type="button">搜索</button>
+            </span>
           </div>
         </div>
       </div>
