@@ -7,6 +7,7 @@ class SelectArea extends React.Component {
     super(props);
     this.onSearch = this.props.onSearch;
   }
+
   render() {
     return (
       <div className="select">
@@ -25,7 +26,7 @@ class SelectArea extends React.Component {
     )
   }
 
-  _searchItem(event){
+  _searchItem(event) {
     let keyword = event.target.value;
     this.onSearch(keyword);
   }
@@ -37,37 +38,54 @@ class SearchResult extends React.Component {
     return <div>
       {
         items.filter(item => item.toLowerCase().includes(keyword.toLowerCase()))
-          .map(i => <div>{i}</div>)
+          .map(i => <div>{i}
+            <button>button</button>
+          </div>)
       }
     </div>;
   }
 }
 
 class Picture extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: '',
-      productName: '',
-      price: '',
-      description: '',
-      imgName: '',
-      product: []
-    }
-  }
-
-  componentDidMount() {
-    request.post('/api/items')
-      .end((err, data) => {
-        this.setState({
-          product: data.body
-        });
-      });
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     id: '',
+  //     productName: '',
+  //     price: '',
+  //     description: '',
+  //     imgName: '',
+  //     product: this.props.product
+  //   };
+  // }
+  //
+  // componentDidMount() {
+  //   request.post('/api/items')
+  //     .end((err, data) => {
+  //       this.setState({
+  //         product: data.body
+  //       });
+  //     });
+  // }
 
 
   render() {
-    const data = this.state.product.map(p =>
+    const product = this.props.product;
+    // const data = this.state.product.map(p =>
+    //   < div className="col-sm-4 col-md-3">
+    //     <div className="thumbnail">
+    //       <img src={"../images/goods/" + p.imgName} className="picture"/>
+    //       <p>￥{p.price}/天 {p.productName}</p>
+    //       <p>
+    //         <button href="#" className="btn btn-primary" role="button"
+    //                 onClick={this._knowMore(p.productName)}>了解更多
+    //         </button>
+    //       </p>
+    //     </div>
+    //   </div>
+    // );
+    alert(product[0] + "1111");
+    const data = product.map(p =>
       < div className="col-sm-4 col-md-3">
         <div className="thumbnail">
           <img src={"../images/goods/" + p.imgName} className="picture"/>
@@ -101,17 +119,34 @@ class Rent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      product: [],
       keyword: ''
     }
   }
+
+  componentDidMount() {
+    request.post('/api/items')
+      .end((err, data) => {
+        this.setState({
+          product: data.body
+        });
+        // alert(this.state.product[0].id+'------');
+      });
+  }
+
   render() {
     return (
       <div>
         <SelectArea onSearch={(keyword) => this.setState({keyword: keyword})}/>
+        {/*<SearchResult keyword={this.state.keyword} items={*/}
+        {/*['JavaScript', 'Node', 'React', 'Redux', 'Bootstrap', 'Webpack', 'Babel']*/}
+        {/*}/>*/}
+
         <SearchResult keyword={this.state.keyword} items={
           ['JavaScript', 'Node', 'React', 'Redux', 'Bootstrap', 'Webpack', 'Babel']
         }/>
-        <Picture />
+
+        <Picture product={this.state.product}/>
       </div>
     )
   }
