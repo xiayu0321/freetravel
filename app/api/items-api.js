@@ -15,11 +15,13 @@ router.post('/', function (req, res, next) {
   });
 });
 
-router.get('/', function (req, res, next) {
-  Product.find().lean().exec((err, data) => {
-    if (err) return next(err);
-    console.log(data[1].price + '=======');
-    res.json(data);
-  });
+router.post('/details', function (req, res, next) {
+  const id = req.body.id;
+  console.log(id);
+  // Product.findOne((id),(err,data) => {
+  //   if (err) return next(err);
+  //   console.log(data[1].id+'++++++');
+  //   res.json(data);
+  // });
 });
 export default router;

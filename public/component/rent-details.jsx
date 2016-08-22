@@ -8,14 +8,28 @@ import IntroduceImg02 from '../images/rent-details/tent-details-001.jpg';
 import IntroduceImg03 from '../images/rent-details/tent-details-002.jpg';
 import IntroduceImg04 from '../images/rent-details/tent-01.jpg';
 import {Link} from 'react-router';
+import request from 'superagent';
+
 
 
 import '../css/rent-details.css';
 
 class GoodsDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: []
+    }
+  }
+  componentDidMount() {
+    request.post('/api/items/details')
+      .send({id:this.props.params.id})
+      .end();
+  }
   render() {
     return (
       <div className="goods-details">
+        {this.props.params.id}
         <div className="goods-header">
           <div className="left-pic">
             <div className="img-main-rent">
