@@ -19,6 +19,7 @@ class SelectArea extends React.Component {
       productName: '',
       price: '',
       description: '',
+      imgName:'',
       product: []
     }
   }
@@ -31,7 +32,7 @@ class SelectArea extends React.Component {
         });
         // alert(data);
         console.log("-----" + this.state.product);
-        alert(this.state.product[1].price);
+        alert(this.state.product[1].imgName);
         alert(typeof data);
       });
   }
@@ -50,17 +51,18 @@ class SelectArea extends React.Component {
 
 
   render() {
+    const img = '';
     const data = this.state.product.map(p =>
-
-      <div className="col-sm-4 col-md-3">
-        <div className="thumbnail">
-          <img src={picture1} className="picture"/>
-          <p>￥{p.price}/天 {p.productName}</p>
-          <p><a href="#" className="btn btn-primary" role="button">Button</a>
-            <a href="#" class="btn btn-default" role="button">Button</a>
-          </p>
+        < div className="col-sm-4 col-md-3">
+          <div className="thumbnail">
+            <img src={"../images/goods/"+p.imgName+".jpg"} className="picture"/>
+            <p>￥{p.price}/天 {p.productName}</p>
+            <p><a href="#" className="btn btn-primary" role="button">Button</a>
+              <a href="#" class="btn btn-default" role="button">Button</a>
+            </p>
+          </div>
         </div>
-      </div>
+
     );
 
     return (

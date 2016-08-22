@@ -12,6 +12,7 @@ const userSchema = new Schema({
 const productSchema = new Schema({
   id: Number,
   productName: String,
+  imgName:String,
   price: Number,
   description: String
 });

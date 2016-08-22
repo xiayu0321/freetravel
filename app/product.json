@@ -1,7 +1,7 @@
 [
-	{"id":"1","productName":"相机","price":"100","description":"abc"},
+	{"id":"1","productName":"相机","imgName":"digital-single-lens-reflex-001","price":"100","description":"abc"},
 	{"id":"2","productName":"帐篷","price":"30","description":"Leonard"},
 	{"id":"3","productName":"神马","price":"20","description":"aaaaaa"},
-	{"id":"3","productName":"神马","price":"20","description":"aaaaaa"},
-	{"id":"3","productName":"神马","price":"20","description":"aaaaaa"}
+	{"id":"4","productName":"神马","price":"20","description":"aaaawwqaa"},
+	{"id":"5","productName":"神马","price":"20","description":"8988"}
 ]
