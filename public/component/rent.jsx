@@ -43,26 +43,16 @@ class Picture extends React.Component {
   }
 
 
-  // _getInformation(event) {
-  //   request.get('/api/items')
-  //     .end((err, data) => {
-  //       alert(data);
-  //       console.log("....." + data.body[1].price)
-  //       console.log("aaaaa" + data)
-  //       console.log(data.text.length);
-  //       // alert(this.state.id);
-  //     });
-  // }
-
-
   render() {
     const data = this.state.product.map(p =>
       < div className="col-sm-4 col-md-3">
         <div className="thumbnail">
           <img src={"../images/goods/" + p.imgName} className="picture"/>
           <p>￥{p.price}/天 {p.productName}</p>
-          <p><a href="#" className="btn btn-primary" role="button">Button</a>
-            <a href="#" class="btn btn-default" role="button">Button</a>
+          <p>
+            <button href="#" className="btn btn-primary" role="button"
+                    onClick={this._knowMore(p.productName)}>了解更多
+            </button>
           </p>
         </div>
       </div>
@@ -75,7 +65,15 @@ class Picture extends React.Component {
       </div>
     )
   }
+
+  _knowMore(productName) {
+    return () => {
+      alert(productName);
+    };
+  }
 }
+
+
 class Rent extends React.Component {
   render() {
     return (
