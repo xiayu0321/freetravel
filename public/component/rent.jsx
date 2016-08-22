@@ -116,8 +116,20 @@ class Picture extends React.Component {
       return <div>
         {
           product.filter(item => item.productName.toLowerCase().includes(keyword.toLowerCase()))
-            .map(i => <div>{i.productName}
-              <button>button</button>
+            .map(i => <div>
+              {/*{i.productName}*/}
+              < div className="col-sm-4 col-md-3">
+                     <div className="thumbnail">
+                       <img src={"../images/goods/" + i.imgName} className="picture"/>
+                       <p>￥{i.price}/天 {i.productName}</p>
+                       <p>
+                         <button href="#" className="btn btn-primary" role="button"
+                                 onClick={this._knowMore(i.productName)}>了解更多
+                         </button>
+                       </p>
+                     </div>
+                   </div>
+              {/*<button>button</button>*/}
             </div>)
         }
       </div>;
