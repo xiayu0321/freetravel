@@ -2,6 +2,7 @@ import React from 'react';
 import request from 'superagent';
 
 import "../css/rent.css"
+
 class SelectArea extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ class SelectArea extends React.Component {
         </div>
         <div></div>
       </div>
-    )
+    );
   }
 
   _searchItem(event) {
@@ -32,117 +33,29 @@ class SelectArea extends React.Component {
   }
 }
 
-// class SearchResult extends React.Component {
-//   render() {
-//     const {keyword, items}  = this.props;
-//     return <div>
-//       {
-//         items.filter(item => item.toLowerCase().includes(keyword.toLowerCase()))
-//           .map(i => <div>{i}
-//             <button>button</button>
-//           </div>)
-//       }
-//     </div>;
-//   }
-// }
 
 class Picture extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     id: '',
-  //     productName: '',
-  //     price: '',
-  //     description: '',
-  //     imgName: '',
-  //     product: this.props.product
-  //   };
-  // }
-  //
-  // componentDidMount() {
-  //   request.post('/api/items')
-  //     .end((err, data) => {
-  //       this.setState({
-  //         product: data.body
-  //       });
-  //     });
-  // }
-
-
   render() {
-
-    // const {keyword,product} = this.props;
-    // const data = this.state.product.map(p =>
-    //   < div className="col-sm-4 col-md-3">
-    //     <div className="thumbnail">
-    //       <img src={"../images/goods/" + p.imgName} className="picture"/>
-    //       <p>￥{p.price}/天 {p.productName}</p>
-    //       <p>
-    //         <button href="#" className="btn btn-primary" role="button"
-    //                 onClick={this._knowMore(p.productName)}>了解更多
-    //         </button>
-    //       </p>
-    //     </div>
-    //   </div>
-    // );
-    // alert(product[0] + "1111");
-    // const data = product.map(p =>
-    //   < div className="col-sm-4 col-md-3">
-    //     <div className="thumbnail">
-    //       <img src={"../images/goods/" + p.imgName} className="picture"/>
-    //       <p>￥{p.price}/天 {p.productName}</p>
-    //       <p>
-    //         <button href="#" className="btn btn-primary" role="button"
-    //                 onClick={this._knowMore(p.productName)}>了解更多
-    //         </button>
-    //       </p>
-    //     </div>
-    //   </div>
-    // );
-    // return (
-    //   <div className="row image container-fluid ">
-    //     {
-    //       product.filter(item => item.productName.toLowerCase().includes(keyword.toLowerCase()))
-    //         .map(i => <div>{i}
-    //           <button>button</button>
-    //         </div>)
-    //     }
-    //     <div className="row row-rent">
-    //       <div>{data}</div>
-    //     </div>
-    //   </div>
-    // );
-      const {keyword, product}  = this.props;
-      return <div>
-        {
-          product.filter(item => item.productName.toLowerCase().includes(keyword.toLowerCase()))
-            .map(i => <div>
-              {/*{i.productName}*/}
-              < div className="col-sm-4 col-md-3">
-                     <div className="thumbnail">
-                       <img src={"../images/goods/" + i.imgName} className="picture"/>
-                       <p>￥{i.price}/天 {i.productName}</p>
-                       <p>
-                         <button href="#" className="btn btn-primary" role="button"
-                                 onClick={this._knowMore(i.productName)}>了解更多
-                         </button>
-                       </p>
-                     </div>
-                   </div>
-              {/*<button>button</button>*/}
-            </div>)
-        }
-      </div>;
-    // const {keyword, items}  = this.props;
-    // return <div>
-    //   {
-    //     items.filter(item => item.toLowerCase().includes(keyword.toLowerCase()))
-    //       .map(i => <div>{i}
-    //         <button>button</button>
-    //       </div>)
-    //   }
-    {/*</div>;*/}
-    }
+    const {keyword, product}  = this.props;
+    return <div>
+      {
+        product.filter(item => item.productName.toLowerCase().includes(keyword.toLowerCase()))
+          .map(i => <div>
+            < div className="col-sm-4 col-md-3">
+              <div className="thumbnail">
+                <img src={"../images/goods/" + i.imgName} className="picture"/>
+                <p>￥{i.price}/天 {i.productName}</p>
+                <p>
+                  <button href="#" className="btn btn-primary" role="button"
+                          onClick={this._knowMore(i.productName)}>了解更多
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>)
+      }
+    </div>
+  }
 
 
   _knowMore(productName) {
@@ -168,7 +81,6 @@ class Rent extends React.Component {
         this.setState({
           product: data.body
         });
-        // alert(this.state.product[0].id+'------');
       });
   }
 
@@ -176,17 +88,8 @@ class Rent extends React.Component {
     return (
       <div>
         <SelectArea onSearch={(keyword) => this.setState({keyword: keyword})}/>
-        {/*<SearchResult keyword={this.state.keyword} items={*/}
-        {/*['JavaScript', 'Node', 'React', 'Redux', 'Bootstrap', 'Webpack', 'Babel']*/}
-        {/*}/>*/}
 
-        {/*<SearchResult keyword={this.state.keyword} items={*/}
-          {/*['JavaScript', 'Node', 'React', 'Redux', 'Bootstrap', 'Webpack', 'Babel']*/}
-        {/*}/>*/}
-
-        <Picture keyword={this.state.keyword} product={this.state.product} items={
-          ['JavaScript', 'Node', 'React', 'Redux', 'Bootstrap', 'Webpack', 'Babel']
-        }/>
+        <Picture keyword={this.state.keyword} product={this.state.product}/>
       </div>
     )
   }
