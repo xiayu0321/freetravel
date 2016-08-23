@@ -9,6 +9,7 @@ import IntroduceImg03 from '../images/rent-details/tent-details-002.jpg';
 import IntroduceImg04 from '../images/rent-details/tent-01.jpg';
 import {Link} from 'react-router';
 import request from 'superagent';
+import {hashHistory} from 'react-router'
 
 
 import '../css/rent-details.css';
@@ -63,6 +64,16 @@ class GoodsDetails extends React.Component {
     });
   }
 
+  _isLogin() {
+    return () => {
+      alert('no login');
+      if (this.state.product.id > 5) {
+
+        hashHistory.push('/login');
+      }
+    };
+  }
+
 
   render() {
     const productData = this.state.product;
@@ -94,63 +105,122 @@ class GoodsDetails extends React.Component {
             {/*</Link>*/}
             <div className="btn-zuyong">
               <button type="button" className="btn btn-primary enter-renter btn-zuyong" data-toggle="modal"
-                      data-target="#exampleModal" data-whatever="@mdo">租用
+                      data-target="#exampleModal" data-whatever="@mdo" onClick={this._isLogin()}>租用
+                {/*data-target={0>1 ? '#exampleModal' : ''} data-whatever="@mdo" onClick={this._isLogin()}>租用*/}
               </button>
+              {/*{2>1 ? <div>111</div> :null}*/}  
+              {this.props.params.id <5 ?
+                <div>
+                  <form >
+                    <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel">
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+                              aria-hidden="true">&times;</span></button>
+                            <h4 className="modal-title" id="exampleModalLabel">确认订单</h4>
+                          </div>
+                          <div className="modal-body">
+                            <form>
+                              <div className="form-group">
+                                <label for="recipient-name" className="control-label">收货人姓名:</label>
+                                <input type="text" className="form-control" id="recipient-name"
+                                       value={this.state.name}
+                                       onChange={this._nameOnChange.bind(this)}/>
+                                {this.state.name}
+                              </div>
+                              <div className="form-group">
+                                <label for="recipient-name" className="control-label">联系电话:</label>
+                                <input type="text" className="form-control" id="recipient-name"
+                                       value={this.state.phone}
+                                       onChange={this._phoneOnChange.bind(this)}/>
+                                {this.state.phone}
+                              </div>
+                              <div className="form-group">
+                                <label for="recipient-name" className="control-label">收货地址:</label>
+                                <input type="text" className="form-control" id="recipient-name"
+                                       value={this.state.address}
+                                       onChange={this._addressOnChange.bind(this)}/>
+                                {this.state.address}
+                              </div>
+                              <div className="form-group">
+                                <label for="message-text" className="control-label">备注:</label>
+                                <textarea className="form-control" id="message-text"
+                                          value={this.state.otherMessage}
+                                          onChange={this._otherMessageOnChange.bind(this)}/>
+                                {this.state.otherMessage}
+                              </div>
+                            </form>
+                          </div>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            <Link to='www.baidu.com'>
+                              <button type="button" className="btn btn-primary">确认租用</button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                :
+                <div>222</div>}
             </div>
 
 
-            <form >
-              <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                   aria-labelledby="exampleModalLabel">
-                <div className="modal-dialog" role="document">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                      <h4 className="modal-title" id="exampleModalLabel">确认订单</h4>
-                    </div>
-                    <div className="modal-body">
-                      <form>
-                        <div className="form-group">
-                          <label for="recipient-name" className="control-label">收货人姓名:</label>
-                          <input type="text" className="form-control" id="recipient-name"
-                                 value={this.state.name}
-                                 onChange={this._nameOnChange.bind(this)}/>
-                          {this.state.name}
-                        </div>
-                        <div className="form-group">
-                          <label for="recipient-name" className="control-label">联系电话:</label>
-                          <input type="text" className="form-control" id="recipient-name"
-                                 value={this.state.phone}
-                                 onChange={this._phoneOnChange.bind(this)}/>
-                          {this.state.phone}
-                        </div>
-                        <div className="form-group">
-                          <label for="recipient-name" className="control-label">收货地址:</label>
-                          <input type="text" className="form-control" id="recipient-name"
-                                 value={this.state.address}
-                                 onChange={this._addressOnChange.bind(this)}/>
-                          {this.state.address}
-                        </div>
-                        <div className="form-group">
-                          <label for="message-text" className="control-label">备注:</label>
-                          <textarea className="form-control" id="message-text"
-                                    value={this.state.otherMessage}
-                                    onChange={this._otherMessageOnChange.bind(this)}/>
-                          {this.state.otherMessage}
-                        </div>
-                      </form>
-                    </div>
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                      <Link to='www.baidu.com'>
-                        <button type="button" className="btn btn-primary">确认租用</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
+            {/*<form >*/}
+            {/*<div className="modal fade" id="exampleModal" tabindex="-1" role="dialog"*/}
+            {/*aria-labelledby="exampleModalLabel">*/}
+            {/*<div className="modal-dialog" role="document">*/}
+            {/*<div className="modal-content">*/}
+            {/*<div className="modal-header">*/}
+            {/*<button type="button" className="close" data-dismiss="modal" aria-label="Close"><span*/}
+            {/*aria-hidden="true">&times;</span></button>*/}
+            {/*<h4 className="modal-title" id="exampleModalLabel">确认订单</h4>*/}
+            {/*</div>*/}
+            {/*<div className="modal-body">*/}
+            {/*<form>*/}
+            {/*<div className="form-group">*/}
+            {/*<label for="recipient-name" className="control-label">收货人姓名:</label>*/}
+            {/*<input type="text" className="form-control" id="recipient-name"*/}
+            {/*value={this.state.name}*/}
+            {/*onChange={this._nameOnChange.bind(this)}/>*/}
+            {/*{this.state.name}*/}
+            {/*</div>*/}
+            {/*<div className="form-group">*/}
+            {/*<label for="recipient-name" className="control-label">联系电话:</label>*/}
+            {/*<input type="text" className="form-control" id="recipient-name"*/}
+            {/*value={this.state.phone}*/}
+            {/*onChange={this._phoneOnChange.bind(this)}/>*/}
+            {/*{this.state.phone}*/}
+            {/*</div>*/}
+            {/*<div className="form-group">*/}
+            {/*<label for="recipient-name" className="control-label">收货地址:</label>*/}
+            {/*<input type="text" className="form-control" id="recipient-name"*/}
+            {/*value={this.state.address}*/}
+            {/*onChange={this._addressOnChange.bind(this)}/>*/}
+            {/*{this.state.address}*/}
+            {/*</div>*/}
+            {/*<div className="form-group">*/}
+            {/*<label for="message-text" className="control-label">备注:</label>*/}
+            {/*<textarea className="form-control" id="message-text"*/}
+            {/*value={this.state.otherMessage}*/}
+            {/*onChange={this._otherMessageOnChange.bind(this)}/>*/}
+            {/*{this.state.otherMessage}*/}
+            {/*</div>*/}
+            {/*</form>*/}
+            {/*</div>*/}
+            {/*<div className="modal-footer">*/}
+            {/*<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>*/}
+            {/*<Link to='www.baidu.com'>*/}
+            {/*<button type="button" className="btn btn-primary">确认租用</button>*/}
+            {/*</Link>*/}
+            {/*</div>*/}
+            {/*</div>*/}
+            {/*</div>*/}
+            {/*</div>*/}
+            {/*</form>*/}
 
 
           </div>
