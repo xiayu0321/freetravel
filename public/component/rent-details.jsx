@@ -100,12 +100,12 @@ class GoodsDetails extends React.Component {
         <div className="goods-header">
           <div className="left-pic">
             <div className="img-main-rent">
-              <img className="main-img" src={"../images/goods/" + productData.imgName}/>
+              <img className="main-img" src={"../images/goods/" + productData.imgName + ".jpg"}/>
             </div>
             <div className="img-other">
-              <img src={Img03}/>
-              <img src={Img02}/>
-              <img src={Img01}/>
+              <img src={"../images/goods/" + productData.imgName + "/" + "001.jpg"}/>
+              <img src={"../images/goods/" + productData.imgName + "/" + "002.jpg"}/>
+              <img src={"../images/goods/" + productData.imgName + "/" + "003.jpg"}/>
             </div>
           </div>
           <div className="goods-information">
@@ -181,7 +181,11 @@ class GoodsDetails extends React.Component {
                   </form>
                 </div>
                 :
-                <div>222</div>}
+                <div class="alert alert-danger" role="alert">
+                  请先<Link to="/login" class="alert-link">登录 </Link>!登陆后才能租用
+                </div>
+              }
+
             </div>
 
 
@@ -246,9 +250,7 @@ class GoodsDetails extends React.Component {
             <h1>商品介绍：</h1>
             <h2>商品描述：</h2>
             <p>
-              3人-4人双层帐; 展开尺寸：240*210*140；内帐材料: 190T透气涤纶布+高密网纱；空间结构: 一居室；帐底材质:
-              210D牛津布；外帐材质:190T防水涤塔夫；外帐防水指数: 2000mm(含)-3000mm(含)；帐底防水指数: 2000mm(含)-3000mm(含)；支架材质:
-              玻璃钢；适应季节: 三季帐全自动速开：全自动面搭建帐篷，开蓬只需要一人一提一拉即可完成,3秒速开。
+              {productData.description}
             </p>
             <h2>商品其他信息：</h2>
             <p>
@@ -260,10 +262,10 @@ class GoodsDetails extends React.Component {
             </p>
           </div>
           <div className="goods-pictures-wall">
-            <img className="img-start-end" src={IntroduceImg01}/>
-            <img src={IntroduceImg02}/>
-            <img src={IntroduceImg03}/>
-            <img className="img-start-end" src={IntroduceImg04}/>
+            <img className="img-start-end" src={"../images/goods/" + productData.imgName + "/" + "001.jpg"}/>
+            <img src={"../images/goods/" + productData.imgName + "/" + "002.jpg"}/>
+            <img src={"../images/goods/" + productData.imgName + "/" + "003.jpg"}/>
+            <img className="img-start-end" src={"../images/goods/" + productData.imgName + ".jpg"}/>
           </div>
         </div>
       </div>
