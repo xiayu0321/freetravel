@@ -45,7 +45,7 @@ class Picture extends React.Component {
           .map(i => <div>
             < div className="col-sm-4 col-md-3">
               <div className="thumbnail">
-                <img src={"../images/goods/" + i.imgName} className="picture"/>
+                <img src={"../images/goods/" + i.imgName+".jpg"} className="picture"/>
                 <p>￥{i.price}/天 {i.productName}</p>
                 <p>
                   <button href="www.baidu.com" className="btn btn-primary" role="button"
