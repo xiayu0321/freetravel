@@ -22,7 +22,8 @@ class GoodsDetails extends React.Component {
       phone: '',
       address: '',
       otherMessage: '',
-      product: {}
+      product: {},
+      username: 'unknown',
     }
   }
 
@@ -34,6 +35,22 @@ class GoodsDetails extends React.Component {
           product: data.body
         });
       });
+    request
+      .get('/api/personal')
+      .end((err, res) => {
+        console.log(err);
+        if (err) {
+          if (res.statusCode === 401) {
+            // alert('please login!');
+            // return hashHistory.push('/login');
+          } else {
+            return alert('请先登录!');
+          }
+        }
+        console.log("statusCode:" + res.statusCode);
+        const {username} = res.body;
+        this.setState({username});
+      })
   }
 
   _submitOrder(event) {
@@ -66,9 +83,8 @@ class GoodsDetails extends React.Component {
 
   _isLogin() {
     return () => {
-      alert('no login');
-      if (this.state.product.id > 5) {
-
+      if (this.state.username === "unknown") {
+        alert('no login');
         hashHistory.push('/login');
       }
     };
@@ -108,8 +124,8 @@ class GoodsDetails extends React.Component {
                       data-target="#exampleModal" data-whatever="@mdo" onClick={this._isLogin()}>租用
                 {/*data-target={0>1 ? '#exampleModal' : ''} data-whatever="@mdo" onClick={this._isLogin()}>租用*/}
               </button>
-              {/*{2>1 ? <div>111</div> :null}*/}  
-              {this.props.params.id <5 ?
+              {/*{2>1 ? <div>111</div> :null}*/}
+              {this.state.username !== "unknown" ?
                 <div>
                   <form >
                     <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog"
