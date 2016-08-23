@@ -91,10 +91,10 @@
     padding: 30px 0 0;
 }
 
-.goods-information div {
-    font-size: 26px;
-    padding-left: 40px;
-}
+/*.goods-information div {*/
+/*font-size: 26px;*/
+/*padding-left: 40px;*/
+/*}*/
 
 .goods-price {
     padding: 0 40px 15px;
@@ -111,14 +111,25 @@
     background-color: white;
 }
 
-.goods-information button {
+/*.goods-information button {*/
+/*!*display: inline-block;*!*/
+/*!*background: #c5f9e7;*!*/
+/*!*opacity: 0.8;*!*/
+/*!*border: none;*!*/
+/*!*width: 52%;*!*/
+/*!*height: 50px;*!*/
+/*!*margin: 50px 40px;*!*/
+/*!*font-size: 24px;*!*/
+/*}*/
+
+.goods-information .btn-zuyong {
     display: inline-block;
-    background: #c5f9e7;
-    opacity: 0.8;
+    /*background: #c5f9e7;*/
+    /*opacity: 0.8;*/
     border: none;
-    width: 52%;
+    width: 62%;
     height: 50px;
-    margin: 50px 40px;
+    margin:  40px;
     font-size: 24px;
 }
 

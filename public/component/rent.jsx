@@ -1,5 +1,7 @@
 import React from 'react';
 import request from 'superagent';
+import {hashHistory} from 'react-router'
+
 
 import "../css/rent.css"
 
@@ -46,8 +48,8 @@ class Picture extends React.Component {
                 <img src={"../images/goods/" + i.imgName} className="picture"/>
                 <p>￥{i.price}/天 {i.productName}</p>
                 <p>
-                  <button href="#" className="btn btn-primary" role="button"
-                          onClick={this._knowMore(i.productName)}>了解更多
+                  <button href="www.baidu.com" className="btn btn-primary" role="button"
+                          onClick={this._knowMore(i.id)}>了解更多
                   </button>
                 </p>
               </div>
@@ -58,9 +60,10 @@ class Picture extends React.Component {
   }
 
 
-  _knowMore(productName) {
+  _knowMore(id) {
     return () => {
-      alert(productName);
+      // alert(productName);
+      hashHistory.push('/goods-details/'+id);
     };
   }
 }

@@ -8,18 +8,72 @@ import IntroduceImg02 from '../images/rent-details/tent-details-001.jpg';
 import IntroduceImg03 from '../images/rent-details/tent-details-002.jpg';
 import IntroduceImg04 from '../images/rent-details/tent-01.jpg';
 import {Link} from 'react-router';
+import request from 'superagent';
 
 
 import '../css/rent-details.css';
 
 class GoodsDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      phone: '',
+      address: '',
+      otherMessage: '',
+      product: {}
+    }
+  }
+
+  componentDidMount() {
+    request.post('/api/items/details')
+      .send({id: this.props.params.id})
+      .end((err, data) => {
+        this.setState({
+          product: data.body
+        });
+      });
+  }
+
+  _submitOrder(event) {
+    event.preventDefault();
+  }
+
+  _nameOnChange(event) {
+    this.setState({
+      name: event.target.value
+    });
+  }
+
+  _phoneOnChange(event) {
+    this.setState({
+      phone: event.target.value
+    });
+  }
+
+  _addressOnChange(event) {
+    this.setState({
+      address: event.target.value
+    });
+  }
+
+  _otherMessageOnChange(event) {
+    this.setState({
+      otherMessage: event.target.value
+    });
+  }
+
+
   render() {
+    const productData = this.state.product;
     return (
       <div className="goods-details">
+        {this.props.params.id}
+
         <div className="goods-header">
           <div className="left-pic">
             <div className="img-main-rent">
-              <img className="main-img" src={ImgMain}/>
+              <img className="main-img" src={"../images/goods/" + productData.imgName}/>
             </div>
             <div className="img-other">
               <img src={Img03}/>
@@ -28,16 +82,77 @@ class GoodsDetails extends React.Component {
             </div>
           </div>
           <div className="goods-information">
-            <p className="goods-name">旅游帐篷A1</p><br/>
+            <p className="goods-name">{productData.productName}</p><br/>
             <div className="separate-left"></div>
             <div className="separate-right"></div>
-            <p className="goods-price">商品租价：<b>50</b>元/天</p>
+            <p className="goods-price">商品租价：<b>{productData.price}</b>元/天</p>
             <p className="goods-address">商品所在地：<span>陕西省 西安市 长安区</span></p>
-            <Link to='/orderPage'>
-              <button type="submit" className="enter-renter">
-                确认租用
+            {/*<Link to='/orderPage'>*/}
+            {/*<button type="submit" className="enter-renter">*/}
+            {/*确认租用*/}
+            {/*</button>*/}
+            {/*</Link>*/}
+            <div className="btn-zuyong">
+              <button type="button" className="btn btn-primary enter-renter btn-zuyong" data-toggle="modal"
+                      data-target="#exampleModal" data-whatever="@mdo">租用
               </button>
-            </Link>
+            </div>
+
+
+            <form >
+              <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                   aria-labelledby="exampleModalLabel">
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                      <h4 className="modal-title" id="exampleModalLabel">确认订单</h4>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="form-group">
+                          <label for="recipient-name" className="control-label">收货人姓名:</label>
+                          <input type="text" className="form-control" id="recipient-name"
+                                 value={this.state.name}
+                                 onChange={this._nameOnChange.bind(this)}/>
+                          {this.state.name}
+                        </div>
+                        <div className="form-group">
+                          <label for="recipient-name" className="control-label">联系电话:</label>
+                          <input type="text" className="form-control" id="recipient-name"
+                                 value={this.state.phone}
+                                 onChange={this._phoneOnChange.bind(this)}/>
+                          {this.state.phone}
+                        </div>
+                        <div className="form-group">
+                          <label for="recipient-name" className="control-label">收货地址:</label>
+                          <input type="text" className="form-control" id="recipient-name"
+                                 value={this.state.address}
+                                 onChange={this._addressOnChange.bind(this)}/>
+                          {this.state.address}
+                        </div>
+                        <div className="form-group">
+                          <label for="message-text" className="control-label">备注:</label>
+                          <textarea className="form-control" id="message-text"
+                                    value={this.state.otherMessage}
+                                    onChange={this._otherMessageOnChange.bind(this)}/>
+                          {this.state.otherMessage}
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                      <Link to='www.baidu.com'>
+                        <button type="button" className="btn btn-primary">确认租用</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
           </div>
         </div>
         <div className="goods-introduce">
@@ -66,7 +181,7 @@ class GoodsDetails extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
